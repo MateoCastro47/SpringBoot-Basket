@@ -7,12 +7,12 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public final class Temporada{
-    public String nombre; //"2023/2024"
+    public final String nombre; //"2023/2024"
 
     public static final Pattern PATTERN = Pattern.compile("^\\d{4}/\\d{4}$"); //Con este patrón no hace falta validación de negativo(Preguntar Rico)
     
     protected Temporada(){
-
+        this.nombre = "0000/0000";
     }
 
     public Temporada(String nombre){
