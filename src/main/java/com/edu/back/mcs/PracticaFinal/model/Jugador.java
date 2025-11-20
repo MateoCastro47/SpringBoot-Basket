@@ -39,6 +39,9 @@ public class Jugador {
     @OneToMany(mappedBy = "jugador")
     private List<EstadisticasJugador> estadisticas;
 
+    @OneToMany(mappedBy = "jugador")
+    private List<Fichaje> fichajes;
+
     public Jugador() {
     }
 
@@ -115,6 +118,14 @@ public class Jugador {
 
     public void setEstadisticas(List<EstadisticasJugador> estadisticas) {
         this.estadisticas = estadisticas;
+    }
+
+    public List<Fichaje> getFichajes() {
+        return fichajes;
+    }
+
+    public void setFichajes(List<Fichaje> fichajes) {
+        this.fichajes = fichajes;
     }
 
 

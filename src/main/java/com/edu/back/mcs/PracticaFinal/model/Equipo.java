@@ -51,6 +51,9 @@ public class Equipo {
     @OneToMany(mappedBy = "equipoVisitante")
     private List<Partido> partidosVisitante;
 
+    @OneToMany(mappedBy = "equipo")
+    private List<Fichaje> fichajes;
+
     public Equipo() {
     }
 
@@ -154,6 +157,14 @@ public class Equipo {
 
     public void setPartidosVisitante(List<Partido> partidosVisitante) {
         this.partidosVisitante = partidosVisitante;
+    }
+
+    public List<Fichaje> getFichajes() {
+        return fichajes;
+    }
+
+    public void setFichajes(List<Fichaje> fichajes) {
+        this.fichajes = fichajes;
     }
 
 
