@@ -6,6 +6,8 @@ import com.edu.back.mcs.PracticaFinal.Enums.Posicion;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,21 +17,22 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Jugador")
+@Table(name = "Jugador")
 public class Jugador {
-    
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="Nombre", nullable=false, length=100)
+    @Column(name = "Nombre", nullable = false, length = 100)
     private String nombre;
-    @Column(name="Apellido", nullable=false, length=100)
+    @Column(name = "Apellido", nullable = false, length = 100)
     private String apellido;
-    @Column(name="Edad", nullable=false)
+    @Column(name = "Edad", nullable = false)
     private int edad;
-    @Column(name="Dorsal", nullable=false)
+    @Column(name = "Dorsal", nullable = false)
     private int dorsal;
-    @Column(name="Posicion", nullable=false, length=50)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Posicion", nullable = false, length = 50)
     private Posicion posicion;
 
     @ManyToOne
@@ -45,7 +48,8 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(int dorsal, int edad, Equipo equipo, Long id, String apellido, String nombre, Posicion posicion, List<EstadisticasJugador> estadisticas) {
+    public Jugador(int dorsal, int edad, Equipo equipo, Long id, String apellido, String nombre, Posicion posicion,
+            List<EstadisticasJugador> estadisticas) {
         this.dorsal = dorsal;
         this.edad = edad;
         this.equipo = equipo;
@@ -127,6 +131,5 @@ public class Jugador {
     public void setFichajes(List<Fichaje> fichajes) {
         this.fichajes = fichajes;
     }
-
 
 }

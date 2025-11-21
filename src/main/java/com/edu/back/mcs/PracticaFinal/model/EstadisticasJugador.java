@@ -7,10 +7,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "EstadisticasJugador")
 public class EstadisticasJugador {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long estadisticas_id;
@@ -24,19 +26,20 @@ public class EstadisticasJugador {
     private Partido partido;
 
     // Información adicional, por ejemplo:
-    @Column(name="Puntos", nullable=false)
+    @Column(name = "Puntos", nullable = false)
     private Integer puntos;
-    @Column(name="Asistencias", nullable=false)
+    @Column(name = "Asistencias", nullable = false)
     private Integer asistencias;
-    @Column(name="Rebotes", nullable=false)
+    @Column(name = "Rebotes", nullable = false)
     private Integer rebotes;
-    @Column(name="Minutos", nullable=false)
+    @Column(name = "Minutos", nullable = false)
     private Integer minutosJugados;
 
     public EstadisticasJugador() {
     }
 
-    public EstadisticasJugador(Integer asistencias, Long estadisticas_id, Jugador jugador, Integer minutosJugados, Partido partido, Integer puntos, Integer rebotes) {
+    public EstadisticasJugador(Integer asistencias, Long estadisticas_id, Jugador jugador, Integer minutosJugados,
+            Partido partido, Integer puntos, Integer rebotes) {
         this.asistencias = asistencias;
         this.estadisticas_id = estadisticas_id;
         this.jugador = jugador;
@@ -101,6 +104,5 @@ public class EstadisticasJugador {
     public void setMinutosJugados(Integer minutosJugados) {
         this.minutosJugados = minutosJugados;
     }
-
 
 }

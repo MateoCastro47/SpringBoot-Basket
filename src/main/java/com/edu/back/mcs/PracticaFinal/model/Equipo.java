@@ -15,34 +15,34 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Equipo")
+@Table(name = "Equipo")
 public class Equipo {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name="Nombre", nullable= false, length=255)
+    @Column(name = "Nombre", nullable = false, length = 255)
     private String nombre;
-    @Column(name ="Fundación", nullable=false)
+    @Column(name = "Fundación", nullable = false)
     private LocalDate fechaFundacion;
-    @Column(name="Ciudad", nullable=false, length=155)
+    @Column(name = "Ciudad", nullable = false, length = 155)
     private String ciudad;
-    @Column(name="Presupuesto", nullable=false)
+    @Column(name = "Presupuesto", nullable = false)
     private double presupuesto;
 
     @ManyToOne
-    @JoinColumn(name="Entrenador_id")
+    @JoinColumn(name = "Entrenador_id")
     private Entrenador entrenador;
 
-    @OneToMany(mappedBy= "Equipo")
+    @OneToMany(mappedBy = "equipo")
     private List<Jugador> Jugadores;
 
     @OneToOne
-    @JoinColumn(name= "Estadio_id")
+    @JoinColumn(name = "Estadio_id")
     private Estadio estadio;
 
     @ManyToOne
-    @JoinColumn(name= "liga_id")
+    @JoinColumn(name = "liga_id")
     private Liga liga;
 
     @OneToMany(mappedBy = "equipoLocal")
@@ -57,7 +57,9 @@ public class Equipo {
     public Equipo() {
     }
 
-    public Equipo(Estadio estadio, Entrenador entrenador, Liga liga, LocalDate fechaFundacion, double presupuesto, Long id, String ciudad, String nombre, List<Jugador> jugadores, List<Partido> partidosLocal, List<Partido> partidosVisitante) {
+    public Equipo(Estadio estadio, Entrenador entrenador, Liga liga, LocalDate fechaFundacion, double presupuesto,
+            Long id, String ciudad, String nombre, List<Jugador> jugadores, List<Partido> partidosLocal,
+            List<Partido> partidosVisitante) {
         this.estadio = estadio;
         this.entrenador = entrenador;
         this.liga = liga;
@@ -166,6 +168,5 @@ public class Equipo {
     public void setFichajes(List<Fichaje> fichajes) {
         this.fichajes = fichajes;
     }
-
 
 }

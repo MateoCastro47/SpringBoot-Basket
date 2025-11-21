@@ -12,30 +12,30 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Estadio")
+@Table(name = "Estadio")
 public class Estadio {
-    
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long estadio_id;
-    @Column(name="Nombre", nullable=false, length=255)
+    @Column(name = "Nombre", nullable = false, length = 255)
     private String nombre;
-    @Column(name="Ciudad", nullable=false, length=155)
+    @Column(name = "Ciudad", nullable = false, length = 155)
     private String ciudad;
-    @Column(name="Capacidad", nullable=false)
+    @Column(name = "Capacidad", nullable = false)
     private double Capacidad;
-    
-    @OneToOne(mappedBy= "Estadio")
+
+    @OneToOne(mappedBy = "estadio")
     private Equipo equipo;
 
     @OneToMany(mappedBy = "estadio")
     private List<Partido> partidos;
 
-
     public Estadio() {
     }
 
-    public Estadio(double Capacidad, String ciudad, Equipo equipo, Long estadio_id, String nombre, List<Partido> partidos) {
+    public Estadio(double Capacidad, String ciudad, Equipo equipo, Long estadio_id, String nombre,
+            List<Partido> partidos) {
         this.Capacidad = Capacidad;
         this.ciudad = ciudad;
         this.equipo = equipo;
@@ -87,6 +87,7 @@ public class Estadio {
     public List<Partido> getPartidos() {
         return partidos;
     }
+
     public void setPartidos(List<Partido> partidos) {
         this.partidos = partidos;
     }
