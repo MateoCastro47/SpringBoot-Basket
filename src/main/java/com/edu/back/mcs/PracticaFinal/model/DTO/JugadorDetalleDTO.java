@@ -17,19 +17,13 @@ public class JugadorDetalleDTO {
     private int dorsal;
     private Posicion posicion;
     private EquipoResumenDTO equipoResumenDTO;
-    /**
-     * TODO: Cambiar a List<EstadisticasJugadorResumenDTO> cuando esté disponible.
-     */
-    private List<Long> estadisticasIds;
-    /**
-     * TODO: Cambiar a List<FichajeResumenDTO> cuando esté disponible.
-     */
-    private List<Long> fichajesIds;
+    private List<EstadisticasJugadorDTO> estadisticasJugador;
+    private List<FichajeDTO> fichajes;
 
     public JugadorDetalleDTO() {
     }
     
-    public JugadorDetalleDTO(Long id, String nombre, String apellido, int edad, int dorsal, Posicion posicion, EquipoResumenDTO equipoResumenDTO, List<Long> estadisticasIds, List<Long> fichajesIds) {
+    public JugadorDetalleDTO(Long id, String nombre, String apellido, int edad, int dorsal, Posicion posicion, EquipoResumenDTO equipoResumenDTO, List<EstadisticasJugadorDTO> estadisticasjugador, List<FichajeDTO> fichajes) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -37,8 +31,8 @@ public class JugadorDetalleDTO {
         this.dorsal = dorsal;
         this.posicion = posicion;
         this.equipoResumenDTO = equipoResumenDTO;
-        this.estadisticasIds = estadisticasIds;
-        this.fichajesIds = fichajesIds;
+        this.estadisticasJugador = estadisticasJugador;
+        this.fichajes = fichajes;
     }
 
     public Long getId() {
@@ -97,19 +91,19 @@ public class JugadorDetalleDTO {
         this.equipoResumenDTO = equipoResumenDTO;
     }
 
-    public List<Long> getEstadisticasIds() {
-        return estadisticasIds;
+    public List<EstadisticasJugadorDTO> getEstadisticas() {
+        return estadisticasJugador;
     }
 
-    public void setEstadisticasIds(List<Long> estadisticasIds) {
-        this.estadisticasIds = estadisticasIds;
+    public void setEstadisticasIds(List<EstadisticasJugadorDTO> estadisticas) {
+        this.estadisticasJugador = estadisticas;
     }
 
-    public List<Long> getFichajesIds() {
-        return fichajesIds;
+    public List<FichajeDTO> getFichajes() {
+        return fichajes;
     }
 
-    public void setFichajesIds(List<Long> fichajesIds) {
-        this.fichajesIds = fichajesIds;
+    public void setFichajesIds(List<FichajeDTO> fichajes) {
+        this.fichajes = fichajes;
     }
 }
