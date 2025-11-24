@@ -8,7 +8,7 @@ import org.mapstruct.MappingTarget;
 import com.edu.back.mcs.PracticaFinal.model.Equipo;
 import com.edu.back.mcs.PracticaFinal.model.DTO.EquipoDetalleDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses={JugadorMapper.class})
 public interface EquipoMapper {
     EquipoDetalleDTO toDTO(Equipo equipo);
 
