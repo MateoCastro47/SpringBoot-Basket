@@ -7,6 +7,7 @@ import com.edu.back.mcs.PracticaFinal.model.Estadio;
 import com.edu.back.mcs.PracticaFinal.model.Fichaje;
 import com.edu.back.mcs.PracticaFinal.model.Liga;
 import com.edu.back.mcs.PracticaFinal.model.Partido;
+
 public class EquipoDetalleDTO {
     private Long id;
     private String nombre;
@@ -21,25 +22,27 @@ public class EquipoDetalleDTO {
     private List<Partido> partidosVisitante;
     private List<Fichaje> fichajes;
 
-    protected EquipoDetalleDTO(){
-        
+    protected EquipoDetalleDTO() {
+
     }
 
-    public EquipoDetalleDTO(Long id, String nombre, LocalDate fechaFundacion, String ciudad, double presupuesto, EntrenadorResumenDTO entrenador, List<JugadorResumenDTO> jugadores,
-        Estadio estadio, Liga liga, List<Partido> partidosLocal, List<Partido> partidosVisitante, List<Fichaje> fichajes){
-            this.id = id;
-            this.nombre = nombre;
-            this.fechaFundacion = fechaFundacion;
-            this.ciudad = ciudad;
-            this.presupuesto = presupuesto;
-            this.entrenador = entrenador;
-            this.Jugadores = jugadores;
-            this.estadio= estadio;
-            this.liga = liga;
-            this.partidosLocal = partidosLocal;
-            this.partidosVisitante = partidosVisitante;
-            this.fichajes = fichajes;
-        }
+    public EquipoDetalleDTO(Long id, String nombre, LocalDate fechaFundacion, String ciudad, double presupuesto,
+            EntrenadorResumenDTO entrenador, List<JugadorResumenDTO> jugadores,
+            Estadio estadio, Liga liga, List<Partido> partidosLocal, List<Partido> partidosVisitante,
+            List<Fichaje> fichajes) {
+        this.id = id;
+        this.nombre = nombre;
+        this.fechaFundacion = fechaFundacion;
+        this.ciudad = ciudad;
+        this.presupuesto = presupuesto;
+        this.entrenador = entrenador;
+        this.Jugadores = jugadores;
+        this.estadio = estadio;
+        this.liga = liga;
+        this.partidosLocal = partidosLocal;
+        this.partidosVisitante = partidosVisitante;
+        this.fichajes = fichajes;
+    }
 
     public Long getId() {
         return id;
@@ -137,8 +140,4 @@ public class EquipoDetalleDTO {
         this.fichajes = fichajes;
     }
 
-
-    
-
 }
-

@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.edu.back.mcs.PracticaFinal.model.Equipo;
 
-public interface EquipoRepository extends JpaRepository<Equipo, Long>{
-    Optional<Equipo> findByNombreAndLigaId(String nombre, Long Liga_id);
+public interface EquipoRepository extends JpaRepository<Equipo, Long> {
+    @org.springframework.data.jpa.repository.Query("SELECT e FROM Equipo e WHERE e.nombre = :nombre AND e.liga.liga_id = :ligaId")
+    Optional<Equipo> findByNombreAndLigaId(@org.springframework.data.repository.query.Param("nombre") String nombre,
+            @org.springframework.data.repository.query.Param("ligaId") Long ligaId);
 }
