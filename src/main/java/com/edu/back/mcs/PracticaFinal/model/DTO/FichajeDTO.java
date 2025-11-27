@@ -3,6 +3,7 @@ package com.edu.back.mcs.PracticaFinal.model.DTO;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import com.edu.back.mcs.PracticaFinal.Enums.TipoContrato;
+import com.edu.back.mcs.PracticaFinal.model.ValueObjects.Temporada;
 
 public class FichajeDTO {
     
@@ -14,12 +15,12 @@ public class FichajeDTO {
     private TipoContrato tipoContrato;
     private BigDecimal cantidad;
     private String moneda;
-    private String temporada;
+    private Temporada temporada;
 
     public FichajeDTO() {
     }
 
-    public FichajeDTO(Long fichaje_id, String jugadorNombre, String equipoNombre, LocalDate fechaInicio, LocalDate fechaFin, TipoContrato tipoContrato, BigDecimal cantidad, String moneda, String temporada) {
+    public FichajeDTO(Long fichaje_id, String jugadorNombre, String equipoNombre, LocalDate fechaInicio, LocalDate fechaFin, TipoContrato tipoContrato, BigDecimal cantidad, String moneda, Temporada temporada) {
         this.fichaje_id = fichaje_id;
         this.jugadorNombre = jugadorNombre;
         this.equipoNombre = equipoNombre;
@@ -95,11 +96,11 @@ public class FichajeDTO {
         this.moneda = moneda;
     }
 
-    public String getTemporada() {
+    public Temporada getTemporada() {
         return temporada;
     }
 
-    public void setTemporada(String temporada) {
+    public void setTemporada(Temporada temporada) {
         this.temporada = temporada;
     }
 }
