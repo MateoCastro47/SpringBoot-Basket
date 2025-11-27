@@ -6,4 +6,5 @@ import com.edu.back.mcs.PracticaFinal.model.Entrenador;
 
 public interface EntrenadorRepository extends JpaRepository<Entrenador,Long>{
     
+    boolean existsByNombreAndApellido(String nombre, String apellido);
 }
