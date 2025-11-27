@@ -32,6 +32,13 @@ public class EquipoServiceimpl implements IEquipoService {
 
             equipoMapper.updateEntityFromDTO(dto, equipoExistente);
 
+            //Validar que el entrenador no está en otro equipo
+            if (equipoExistente.getEntrenador() != null) {
+                Optional<Equipo> otroEquipoConMismoEntrenador = equipoRepository.findByEntrenadorAndIdNot(equipoExistente.getEntrenador(), id);
+                if (otroEquipoConMismoEntrenador.isPresent()) {
+                    throw new IllegalArgumentException("El entrenador " + equipoExistente.getEntrenador().getNombre() + " " + equipoExistente.getEntrenador().getApellido() + "ya está asignado al equipo " + otroEquipoConMismoEntrenador.get().getNombre());
+                }
+            }
             return equipoRepository.save(equipoExistente);
 
         } catch (IllegalArgumentException e) {
@@ -61,7 +68,12 @@ public class EquipoServiceimpl implements IEquipoService {
                     "Ya existe un equipo con el nombre: " + dto.getNombre() + " en esta liga");
         }
 
-        return equipoRepository.save(equipo);
+        //validar que el entrenador ya no esté asignado a otro equipo
+        if (equipo.getEntrenador() != null && equipoRepository.existsByEntrenador(equipo.getEntrenador())) {
+            throw new IllegalArgumentException("El entrenador " + equipo.getEntrenador().getNombre() +
+        "" + equipo.getEntrenador().getApellido() + "ya está asignado a otro equipo");
+         }
+         return equipoRepository.save(equipo);
     }
 
     @Override
