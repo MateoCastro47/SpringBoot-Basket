@@ -2,18 +2,18 @@ package com.edu.back.mcs.PracticaFinal.mappers;
 
 import java.util.List;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
+import org.mapstruct.MappingTarget;
 import com.edu.back.mcs.PracticaFinal.model.Partido;
-import com.edu.back.mcs.PracticaFinal.model.DTO.PartidoResumenDTO;
+import com.edu.back.mcs.PracticaFinal.model.DTO.PartidoDetalleDTO;
 
 @Mapper(componentModel="spring")
 public interface PartidoMapper {
     
-    // Ignorar campos que necesitan mapeo personalizado
-    @Mapping(target = "equipoLocalNombre", ignore = true)
-    @Mapping(target = "equipoVisitanteNombre", ignore = true)
-    PartidoResumenDTO toResumenDTO(Partido partido);
-    
-    List<PartidoResumenDTO> toResumenDTOList(List<Partido> partidos);
+    PartidoDetalleDTO toDTO(Partido partido);
+
+    Partido toEntity(PartidoDetalleDTO dto);
+
+    List<PartidoDetalleDTO> toDTOlist(List<PartidoDetalleDTO> partidos);
+
+    void updateEntityFromDTO(PartidoDetalleDTO dto, @MappingTarget Partido partido); 
 }
