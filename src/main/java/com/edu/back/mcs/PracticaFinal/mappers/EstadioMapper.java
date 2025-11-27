@@ -1,16 +1,19 @@
 package com.edu.back.mcs.PracticaFinal.mappers;
 
 import java.util.List;
-
 import org.mapstruct.Mapper;
-
-import com.edu.back.mcs.PracticaFinal.model.DTO.EstadioResumenDTO;
+import org.mapstruct.MappingTarget;
+import com.edu.back.mcs.PracticaFinal.model.DTO.EstadioDetalleDTO;
 import com.edu.back.mcs.PracticaFinal.model.Estadio;
 
 @Mapper(componentModel = "spring")
 public interface EstadioMapper {
     
-    EstadioResumenDTO toResumenDTO(Estadio estadio);
+    EstadioDetalleDTO toDTO(Estadio estadio);
 
-    List<EstadioResumenDTO> toResumenDTOList(List<Estadio> estadios);
+    Estadio toEntity(EstadioDetalleDTO dto);
+
+    List<EstadioDetalleDTO> toDTOlist(List<EstadioDetalleDTO> estadios);
+
+    void updateEntityFromDTO(EstadioDetalleDTO dto, @MappingTarget Estadio estadio);
 }
