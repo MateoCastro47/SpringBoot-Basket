@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,34 +15,35 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Partidos")
+@Table(name = "Partidos")
 public class Partido {
-    
+
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long partido_id;
-    @Column(name="FechaPartido", nullable= false)
+    @Column(name = "FechaPartido", nullable = false)
     private LocalDate fechaPartido;
-    
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipo_local_id")
     private Equipo equipoLocal;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipo_visitante_id")
     private Equipo equipoVisitante;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estadio_id")
     private Estadio estadio;
 
-    @OneToMany(mappedBy = "partido")
+    @OneToMany(mappedBy = "partido", fetch = FetchType.LAZY)
     private List<EstadisticasJugador> estadisticas;
 
     public Partido() {
     }
-    
-    public Partido(Equipo equipoLocal, Equipo equipoVisitante, Estadio estadio, LocalDate fechaPartido, Long partido_id, List<EstadisticasJugador> estadisticas) {
+
+    public Partido(Equipo equipoLocal, Equipo equipoVisitante, Estadio estadio, LocalDate fechaPartido, Long partido_id,
+            List<EstadisticasJugador> estadisticas) {
         this.equipoLocal = equipoLocal;
         this.equipoVisitante = equipoVisitante;
         this.estadio = estadio;
@@ -97,6 +99,5 @@ public class Partido {
     public void setEstadisticas(List<EstadisticasJugador> estadisticas) {
         this.estadisticas = estadisticas;
     }
-
 
 }

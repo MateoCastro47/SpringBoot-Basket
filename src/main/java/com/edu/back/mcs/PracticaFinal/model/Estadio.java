@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,10 +26,10 @@ public class Estadio {
     @Column(name = "Capacidad", nullable = false)
     private double Capacidad;
 
-    @OneToOne(mappedBy = "estadio")
+    @OneToOne(mappedBy = "estadio", fetch = FetchType.LAZY)
     private Equipo equipo;
 
-    @OneToMany(mappedBy = "estadio")
+    @OneToMany(mappedBy = "estadio", fetch = FetchType.LAZY)
     private List<Partido> partidos;
 
     public Estadio() {

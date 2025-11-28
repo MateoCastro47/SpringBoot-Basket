@@ -13,6 +13,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,11 +29,11 @@ public class Fichaje {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fichaje_id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jugador_id", nullable = false)
     private Jugador jugador;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipo_id", nullable = false)
     private Equipo equipo;
 

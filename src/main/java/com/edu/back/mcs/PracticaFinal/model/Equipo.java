@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,28 +31,28 @@ public class Equipo {
     @Column(name = "Presupuesto", nullable = false)
     private double presupuesto;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Entrenador_id")
     private Entrenador entrenador;
 
-    @OneToMany(mappedBy = "equipo")
+    @OneToMany(mappedBy = "equipo", fetch = FetchType.LAZY)
     private List<Jugador> Jugadores;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Estadio_id")
     private Estadio estadio;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "liga_id")
     private Liga liga;
 
-    @OneToMany(mappedBy = "equipoLocal")
+    @OneToMany(mappedBy = "equipoLocal", fetch = FetchType.LAZY)
     private List<Partido> partidosLocal;
 
-    @OneToMany(mappedBy = "equipoVisitante")
+    @OneToMany(mappedBy = "equipoVisitante", fetch = FetchType.LAZY)
     private List<Partido> partidosVisitante;
 
-    @OneToMany(mappedBy = "equipo")
+    @OneToMany(mappedBy = "equipo", fetch = FetchType.LAZY)
     private List<Fichaje> fichajes;
 
     public Equipo() {

@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,14 +36,14 @@ public class Jugador {
     @Column(name = "Posicion", nullable = false, length = 50)
     private Posicion posicion;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "equipo_id")
     private Equipo equipo;
 
-    @OneToMany(mappedBy = "jugador")
+    @OneToMany(mappedBy = "jugador", fetch = FetchType.LAZY)
     private List<EstadisticasJugador> estadisticas;
 
-    @OneToMany(mappedBy = "jugador")
+    @OneToMany(mappedBy = "jugador", fetch = FetchType.LAZY)
     private List<Fichaje> fichajes;
 
     public Jugador() {
