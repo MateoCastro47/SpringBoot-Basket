@@ -12,8 +12,10 @@ public interface EquipoRepository extends JpaRepository<Equipo, Long> {
     Optional<Equipo> findByNombreAndLigaId(@org.springframework.data.repository.query.Param("nombre") String nombre,
             @org.springframework.data.repository.query.Param("ligaId") Long ligaId);
 
-    // Verificar si existe un equipo (diferente al especificado) con el mismo entrenador
+    // Verificar si existe un equipo (diferente al especificado) con el mismo
+    // entrenador
     Optional<Equipo> findByEntrenadorAndIdNot(Entrenador entrenador, Long equipoId);
+
     // Verificar si existe algún equipo con ese entrenador
     boolean existsByEntrenador(Entrenador entrenador);
 }

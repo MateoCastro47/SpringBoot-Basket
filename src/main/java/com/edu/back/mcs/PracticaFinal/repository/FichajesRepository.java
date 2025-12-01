@@ -11,12 +11,12 @@ import com.edu.back.mcs.PracticaFinal.model.Fichaje;
 import com.edu.back.mcs.PracticaFinal.model.Jugador;
 import com.edu.back.mcs.PracticaFinal.model.ValueObjects.Temporada;
 
-
-
-public interface FichajesRepository extends JpaRepository<Fichaje, Long>{
+public interface FichajesRepository extends JpaRepository<Fichaje, Long> {
 
     List<Fichaje> findByJugadorAndFechaFin(Jugador jugador, LocalDate fechaFin);
-    
+
+    List<Fichaje> findByJugadorAndFechaFinAfter(Jugador jugador, LocalDate fecha);
+
     List<Fichaje> findByJugador(Jugador jugador);
 
     List<Fichaje> findByTemporada(Temporada temporada);
