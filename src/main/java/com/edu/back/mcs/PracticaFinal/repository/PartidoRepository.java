@@ -7,17 +7,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.edu.back.mcs.PracticaFinal.model.Equipo;
 import com.edu.back.mcs.PracticaFinal.model.Partido;
 
-public interface PartidoRepository extends JpaRepository<Partido, Long>{
-    
-    boolean existsByEquipoLocalAndEquipoVisitanteAndFecha(
-        Equipo equipoLocal,
-        Equipo equipoVisitante,
-        LocalDate fechaPartido
-    );
+public interface PartidoRepository extends JpaRepository<Partido, Long> {
 
-    Optional<Partido> findByEquipoLocalAndEquipoVisitanteAndFecha(
-        Equipo equipoLocal,
-        Equipo equipoVisitante,
-        LocalDate fechaPartido
-    );
+    boolean existsByEquipoLocalAndEquipoVisitanteAndFechaPartido(
+            Equipo equipoLocal,
+            Equipo equipoVisitante,
+            LocalDate fechaPartido);
+
+    Optional<Partido> findByEquipoLocalAndEquipoVisitanteAndFechaPartido(
+            Equipo equipoLocal,
+            Equipo equipoVisitante,
+            LocalDate fechaPartido);
 }

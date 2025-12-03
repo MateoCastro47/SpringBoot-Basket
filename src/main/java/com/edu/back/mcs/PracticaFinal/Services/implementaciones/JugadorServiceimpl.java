@@ -56,13 +56,15 @@ public class JugadorServiceimpl implements IJugadorService {
 
         // Validar que el jugador no tenga el mismo dorsal dentro de un equipo
         if (jugador.getEquipo() != null) {
-            boolean dorsalExistente = jugadorRepository.existByDorsalAndEquipo(dto.getDorsal(), dto.getEquipoResumenDTO());
-        
-        if (dorsalExistente) {
-            throw new IllegalArgumentException("Ya existe un jugador con el dorsal: " + dto.getDorsal() + " en el equipo: " + dto.getEquipoResumenDTO());    
+            boolean dorsalExistente = jugadorRepository.existsByDorsalAndEquipo(dto.getDorsal(),
+                    dto.getEquipoResumenDTO());
+
+            if (dorsalExistente) {
+                throw new IllegalArgumentException("Ya existe un jugador con el dorsal: " + dto.getDorsal()
+                        + " en el equipo: " + dto.getEquipoResumenDTO());
+            }
         }
-        }
-        
+
         return jugadorRepository.save(jugador);
     }
 

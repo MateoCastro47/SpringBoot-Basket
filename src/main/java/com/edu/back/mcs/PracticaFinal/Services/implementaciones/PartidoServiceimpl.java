@@ -13,27 +13,24 @@ import com.edu.back.mcs.PracticaFinal.model.DTO.PartidoDetalleDTO;
 import com.edu.back.mcs.PracticaFinal.repository.PartidoRepository;
 
 @Service
-public class PartidoServiceimpl implements IPartidoService{
-    
+public class PartidoServiceimpl implements IPartidoService {
+
     public final PartidoRepository partidoRepository;
     public final PartidoMapper partidoMapper;
 
-    
     public PartidoServiceimpl(PartidoRepository partidoRepository, PartidoMapper partidoMapper) {
         this.partidoRepository = partidoRepository;
         this.partidoMapper = partidoMapper;
     }
 
-
     @Override
     public Partido actualizarPartido(Long id, PartidoDetalleDTO dto) {
-        try{
+        try {
             Partido partidoExistente = partidoRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Partido no encontrado con id: " + id)
-            );
+                    () -> new RuntimeException("Partido no encontrado con id: " + id));
             partidoMapper.updateEntityFromDTO(dto, partidoExistente);
-            
-            //Aplicar mismas validaciones que en crear partido
+
+            // Aplicar mismas validaciones que en crear partido
 
             if (partidoExistente.getEquipoLocal() != null && partidoExistente.getEquipoVisitante() != null) {
                 if (partidoExistente.getEquipoLocal().getId().equals(partidoExistente.getEquipoVisitante().getId())) {
@@ -45,8 +42,9 @@ public class PartidoServiceimpl implements IPartidoService{
                 throw new IllegalArgumentException("Cada partido debe tener un estadio asignado");
             }
 
-            Optional<Partido> otroPartido = partidoRepository.findByEquipoLocalAndEquipoVisitanteAndFecha(partidoExistente.getEquipoLocal(),
-            partidoExistente.getEquipoVisitante(), partidoExistente.getFechaPartido());
+            Optional<Partido> otroPartido = partidoRepository.findByEquipoLocalAndEquipoVisitanteAndFechaPartido(
+                    partidoExistente.getEquipoLocal(),
+                    partidoExistente.getEquipoVisitante(), partidoExistente.getFechaPartido());
             if (otroPartido.isPresent() && !otroPartido.get().getPartido_id().equals(id)) {
                 throw new IllegalArgumentException("Ya existe otro partido entre estos equipos en esta fecha");
             }
@@ -55,27 +53,27 @@ public class PartidoServiceimpl implements IPartidoService{
                 throw new IllegalArgumentException("El partido debe tener una fecha asignada");
             }
 
-            if (partidoExistente.getEquipoLocal().getLiga() != null && partidoExistente.getEquipoVisitante().getLiga() != null) {
-                if (!partidoExistente.getEquipoLocal().getLiga().getLiga_id().equals(partidoExistente.getEquipoVisitante().getLiga().getLiga_id())) {
+            if (partidoExistente.getEquipoLocal().getLiga() != null
+                    && partidoExistente.getEquipoVisitante().getLiga() != null) {
+                if (!partidoExistente.getEquipoLocal().getLiga().getLiga_id()
+                        .equals(partidoExistente.getEquipoVisitante().getLiga().getLiga_id())) {
                     throw new IllegalArgumentException("Los equipos deben pertenecer a la misma liga");
                 }
             }
             return partidoRepository.save(partidoExistente);
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new RuntimeException("Datos del partido inválidos " + e.getMessage());
         }
-        
-    }
 
+    }
 
     @Override
     @Transactional
     public void borrarPartido(Long id) {
         if (partidoRepository.existsById(id)) {
             partidoRepository.deleteById(id);
-        }        
+        }
     }
-
 
     @Override
     @Transactional
@@ -92,8 +90,10 @@ public class PartidoServiceimpl implements IPartidoService{
             throw new IllegalArgumentException("El partido debe tener estadio asignado");
         }
         // Validación 3: No se puede duplicar partido
-        if (partidoRepository.existsByEquipoLocalAndEquipoVisitanteAndFecha(partido.getEquipoLocal(), partido.getEquipoVisitante(), partido.getFechaPartido())) {
-            throw new IllegalArgumentException("Ya existe un partido entre: " + partido.getEquipoLocal() + " y " + partido.getEquipoVisitante() + " en la fecha " + partido.getFechaPartido());
+        if (partidoRepository.existsByEquipoLocalAndEquipoVisitanteAndFechaPartido(partido.getEquipoLocal(),
+                partido.getEquipoVisitante(), partido.getFechaPartido())) {
+            throw new IllegalArgumentException("Ya existe un partido entre: " + partido.getEquipoLocal() + " y "
+                    + partido.getEquipoVisitante() + " en la fecha " + partido.getFechaPartido());
         }
         // Validación 4: Debe tener una fecha
         if (partido.getFechaPartido() == null) {
@@ -101,13 +101,13 @@ public class PartidoServiceimpl implements IPartidoService{
         }
         // Validación 5: Debe ser entre equipos de la misma liga
         if (partido.getEquipoLocal().getLiga() != null && partido.getEquipoVisitante().getLiga() != null) {
-            if (!partido.getEquipoLocal().getLiga().getLiga_id().equals(partido.getEquipoVisitante().getLiga().getLiga_id())) {
+            if (!partido.getEquipoLocal().getLiga().getLiga_id()
+                    .equals(partido.getEquipoVisitante().getLiga().getLiga_id())) {
                 throw new IllegalArgumentException("El partido debe ser entre dos equipos de la misma liga");
             }
         }
         return partidoRepository.save(partido);
     }
-
 
     @Override
     @Transactional(readOnly = true)
@@ -115,12 +115,10 @@ public class PartidoServiceimpl implements IPartidoService{
         return partidoRepository.findById(id);
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public List<Partido> obtenerTodosLosPartidos() {
         return partidoRepository.findAll();
     }
 
-    
 }

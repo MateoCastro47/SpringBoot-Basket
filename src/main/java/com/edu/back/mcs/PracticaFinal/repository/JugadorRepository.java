@@ -7,7 +7,7 @@ import com.edu.back.mcs.PracticaFinal.model.DTO.EquipoResumenDTO;
 
 public interface JugadorRepository extends JpaRepository<Jugador, Long> {
 
-    boolean existByDorsalAndEquipo(int dorsal, EquipoResumenDTO equipoResumenDTO);
+    boolean existsByDorsalAndEquipo(int dorsal, EquipoResumenDTO equipoResumenDTO);
 
     long countByEquipo(com.edu.back.mcs.PracticaFinal.model.Equipo equipo);
 }
