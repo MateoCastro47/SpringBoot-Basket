@@ -18,20 +18,16 @@ import com.edu.back.mcs.PracticaFinal.Services.IPartidoService;
 import com.edu.back.mcs.PracticaFinal.mappers.PartidoMapper;
 import com.edu.back.mcs.PracticaFinal.model.Partido;
 import com.edu.back.mcs.PracticaFinal.model.DTO.PartidoDetalleDTO;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
 @RestController
 @RequestMapping("/api/partidos")
 public class PartidoController {
-    
+
     private final PartidoMapper partidoMapper;
     private final IPartidoService partidoService;
-
 
     public PartidoController(PartidoMapper partidoMapper, IPartidoService partidoService) {
         this.partidoMapper = partidoMapper;
@@ -39,38 +35,39 @@ public class PartidoController {
     }
 
     @GetMapping
-    public List<PartidoDetalleDTO> getAll(){
+    public List<PartidoDetalleDTO> getAll() {
         return partidoService.obtenerTodosLosPartidos().stream().map(partidoMapper::toDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PartidoDetalleDTO>getById(@RequestParam Long id) {
+    public ResponseEntity<PartidoDetalleDTO> getById(@PathVariable Long id) {
         return partidoService.obtenerPartidoPorId(id).map(partidoMapper::toDTO)
-        .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<PartidoDetalleDTO> create(@RequestBody PartidoDetalleDTO partidoDetalleDTO,
-        UriComponentsBuilder ucb){
+            UriComponentsBuilder ucb) {
 
-            Partido partidoNuevo = partidoService.crearPartido(partidoDetalleDTO);
-            PartidoDetalleDTO partidoNuevoDTO = partidoMapper.toDTO(partidoNuevo);
+        Partido partidoNuevo = partidoService.crearPartido(partidoDetalleDTO);
+        PartidoDetalleDTO partidoNuevoDTO = partidoMapper.toDTO(partidoNuevo);
 
-            URI location = ucb.path("/api/partidos/{id}").buildAndExpand(partidoNuevo.getPartido_id()).toUri();
+        URI location = ucb.path("/api/partidos/{id}").buildAndExpand(partidoNuevo.getPartido_id()).toUri();
 
-            return ResponseEntity.created(location).body(partidoNuevoDTO);
-        }
-    
+        return ResponseEntity.created(location).body(partidoNuevoDTO);
+    }
+
     @PutMapping("/{id}")
-    public ResponseEntity<PartidoDetalleDTO> update(@PathVariable Long id, @RequestBody PartidoDetalleDTO partidoDetalleDTO) {
-        
+    public ResponseEntity<PartidoDetalleDTO> update(@PathVariable Long id,
+            @RequestBody PartidoDetalleDTO partidoDetalleDTO) {
+
         Partido partidoActualizado = partidoService.actualizarPartido(id, partidoDetalleDTO);
         return ResponseEntity.ok(partidoMapper.toDTO(partidoActualizado));
     }
-    
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         partidoService.borrarPartido(id);
     }
 }
