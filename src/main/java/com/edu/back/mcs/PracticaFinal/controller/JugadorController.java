@@ -20,11 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
 @RestController
 @RequestMapping("/api/jugadores")
 public class JugadorController {
-    
+
     private final JugadorMapper jugadorMapper;
     private final IJugadorService jugadorService;
 
@@ -34,19 +33,20 @@ public class JugadorController {
     }
 
     @GetMapping
-    public List<JugadorDetalleDTO> getAll(){
-        return jugadorService.obtenerTodosLosJugadores().stream().map(jugadorMapper::tDTO).collect(Collectors.toList());
+    public List<JugadorDetalleDTO> getAll() {
+        return jugadorService.obtenerTodosLosJugadores().stream().map(jugadorMapper::tDTO)
+                .collect(Collectors.toList());
     }
-    
+
     @GetMapping("/{id}")
-    public ResponseEntity<JugadorDetalleDTO> getbyId(@PathVariable Long id){
+    public ResponseEntity<JugadorDetalleDTO> getbyId(@PathVariable Long id) {
         return jugadorService.obtenerjugadorPorId(id).map(jugadorMapper::tDTO)
-        .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
     public ResponseEntity<JugadorDetalleDTO> create(@RequestBody JugadorDetalleDTO jugadorDetalleDTO,
-        UriComponentsBuilder ucb){
+            UriComponentsBuilder ucb) {
 
         Jugador jugadorNuevo = jugadorService.crearJugador(jugadorDetalleDTO);
         JugadorDetalleDTO jugadorNuevoDTO = jugadorMapper.tDTO(jugadorNuevo);
@@ -58,7 +58,7 @@ public class JugadorController {
 
     @PutMapping("/{id}")
     public ResponseEntity<JugadorDetalleDTO> update(@PathVariable Long id,
-        @RequestBody JugadorDetalleDTO jugadorDetalleDTO){
+            @RequestBody JugadorDetalleDTO jugadorDetalleDTO) {
 
         Jugador jugadorActualizado = jugadorService.actualizarJugador(id, jugadorDetalleDTO);
         return ResponseEntity.ok(jugadorMapper.tDTO(jugadorActualizado));
@@ -67,7 +67,7 @@ public class JugadorController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         jugadorService.borrarJugador(id);
     }
 }

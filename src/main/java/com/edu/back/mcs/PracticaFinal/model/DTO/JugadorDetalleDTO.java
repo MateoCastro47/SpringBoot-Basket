@@ -6,7 +6,8 @@ import com.edu.back.mcs.PracticaFinal.Enums.Posicion;
 
 /**
  * DTO detalle para la entidad Jugador.
- * Se utiliza para mostrar toda la información detallada del jugador, incluyendo sus relaciones.
+ * Se utiliza para mostrar toda la información detallada del jugador, incluyendo
+ * sus relaciones.
  */
 public class JugadorDetalleDTO {
 
@@ -22,8 +23,10 @@ public class JugadorDetalleDTO {
 
     public JugadorDetalleDTO() {
     }
-    
-    public JugadorDetalleDTO(Long id, String nombre, String apellido, int edad, int dorsal, Posicion posicion, EquipoResumenDTO equipoResumenDTO, List<EstadisticasJugadorDTO> estadisticasjugador, List<FichajeDTO> fichajes) {
+
+    public JugadorDetalleDTO(Long id, String nombre, String apellido, int edad, int dorsal, Posicion posicion,
+            EquipoResumenDTO equipoResumenDTO, List<EstadisticasJugadorDTO> estadisticasJugador,
+            List<FichajeDTO> fichajes) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -91,19 +94,19 @@ public class JugadorDetalleDTO {
         this.equipoResumenDTO = equipoResumenDTO;
     }
 
-    public List<EstadisticasJugadorDTO> getEstadisticas() {
+    public List<EstadisticasJugadorDTO> getEstadisticasJugador() {
         return estadisticasJugador;
     }
 
-    public void setEstadisticasIds(List<EstadisticasJugadorDTO> estadisticas) {
-        this.estadisticasJugador = estadisticas;
+    public void setEstadisticasJugador(List<EstadisticasJugadorDTO> estadisticasJugador) {
+        this.estadisticasJugador = estadisticasJugador;
     }
 
     public List<FichajeDTO> getFichajes() {
         return fichajes;
     }
 
-    public void setFichajesIds(List<FichajeDTO> fichajes) {
+    public void setFichajes(List<FichajeDTO> fichajes) {
         this.fichajes = fichajes;
     }
 }

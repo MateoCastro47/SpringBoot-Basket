@@ -114,6 +114,10 @@ public class Fichaje {
         return dinero;
     }
 
+    public void setDinero(Dinero dinero) {
+        this.dinero = dinero;
+    }
+
     public Temporada getTemporada() {
         return temporada;
     }

@@ -3,11 +3,6 @@ package com.edu.back.mcs.PracticaFinal.model.DTO;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.edu.back.mcs.PracticaFinal.model.Estadio;
-import com.edu.back.mcs.PracticaFinal.model.Fichaje;
-import com.edu.back.mcs.PracticaFinal.model.Liga;
-import com.edu.back.mcs.PracticaFinal.model.Partido;
-
 public class EquipoDetalleDTO {
     private Long id;
     private String nombre;
@@ -16,11 +11,11 @@ public class EquipoDetalleDTO {
     private double presupuesto;
     private EntrenadorResumenDTO entrenador;
     private List<JugadorResumenDTO> Jugadores;
-    private Estadio estadio;
-    private Liga liga;
-    private List<Partido> partidosLocal;
-    private List<Partido> partidosVisitante;
-    private List<Fichaje> fichajes;
+    private EstadioResumenDTO estadio;
+    private LigaResumenDTO liga;
+    private List<PartidoResumenDTO> partidosLocal;
+    private List<PartidoResumenDTO> partidosVisitante;
+    private List<FichajeDTO> fichajes;
 
     protected EquipoDetalleDTO() {
 
@@ -28,8 +23,8 @@ public class EquipoDetalleDTO {
 
     public EquipoDetalleDTO(Long id, String nombre, LocalDate fechaFundacion, String ciudad, double presupuesto,
             EntrenadorResumenDTO entrenador, List<JugadorResumenDTO> jugadores,
-            Estadio estadio, Liga liga, List<Partido> partidosLocal, List<Partido> partidosVisitante,
-            List<Fichaje> fichajes) {
+            EstadioResumenDTO estadio, LigaResumenDTO liga, List<PartidoResumenDTO> partidosLocal,
+            List<PartidoResumenDTO> partidosVisitante, List<FichajeDTO> fichajes) {
         this.id = id;
         this.nombre = nombre;
         this.fechaFundacion = fechaFundacion;
@@ -100,43 +95,43 @@ public class EquipoDetalleDTO {
         this.Jugadores = Jugadores;
     }
 
-    public Estadio getEstadio() {
+    public EstadioResumenDTO getEstadio() {
         return estadio;
     }
 
-    public void setEstadio(Estadio estadio) {
+    public void setEstadio(EstadioResumenDTO estadio) {
         this.estadio = estadio;
     }
 
-    public Liga getLiga() {
+    public LigaResumenDTO getLiga() {
         return liga;
     }
 
-    public void setLiga(Liga liga) {
+    public void setLiga(LigaResumenDTO liga) {
         this.liga = liga;
     }
 
-    public List<Partido> getPartidosLocal() {
+    public List<PartidoResumenDTO> getPartidosLocal() {
         return partidosLocal;
     }
 
-    public void setPartidosLocal(List<Partido> partidosLocal) {
+    public void setPartidosLocal(List<PartidoResumenDTO> partidosLocal) {
         this.partidosLocal = partidosLocal;
     }
 
-    public List<Partido> getPartidosVisitante() {
+    public List<PartidoResumenDTO> getPartidosVisitante() {
         return partidosVisitante;
     }
 
-    public void setPartidosVisitante(List<Partido> partidosVisitante) {
+    public void setPartidosVisitante(List<PartidoResumenDTO> partidosVisitante) {
         this.partidosVisitante = partidosVisitante;
     }
 
-    public List<Fichaje> getFichajes() {
+    public List<FichajeDTO> getFichajes() {
         return fichajes;
     }
 
-    public void setFichajes(List<Fichaje> fichajes) {
+    public void setFichajes(List<FichajeDTO> fichajes) {
         this.fichajes = fichajes;
     }
 
