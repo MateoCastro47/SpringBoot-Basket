@@ -1,6 +1,7 @@
 package com.edu.back.mcs.PracticaFinal.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -44,6 +45,14 @@ public class EquipoController {
     public ResponseEntity<EquipoDetalleDTO> getById(@PathVariable Long id) {
         return equipoService.obtenerEquipoPorId(id).map(equipoMapper::toDTO)
                 .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/buscar")
+    public ResponseEntity<EquipoDetalleDTO> buscarEquipo(@RequestParam String nombre, @RequestParam Long ligaId) {
+        return equipoService.buscarEquipoPorNombreyLiga(nombre, ligaId)
+                .map(equipoMapper::toDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping

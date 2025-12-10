@@ -88,4 +88,8 @@ public class EquipoServiceimpl implements IEquipoService {
         return equipoRepository.findAll();
     }
 
+    @Override
+    public Optional<Equipo> buscarEquipoPorNombreyLiga(String nombre, Long liga_id) {
+    return equipoRepository.findByNombreAndLigaId(nombre, liga_id);
+}
 }

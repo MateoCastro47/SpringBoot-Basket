@@ -16,4 +16,6 @@ public interface IEquipoService {
     Equipo actualizarEquipo(Long id, EquipoDetalleDTO dto);
 
     void borrarEquipo(Long id);
+
+    Optional<Equipo> buscarEquipoPorNombreyLiga(String nombre, Long liga_id);
 }
