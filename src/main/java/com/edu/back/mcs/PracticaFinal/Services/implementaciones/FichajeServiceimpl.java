@@ -118,7 +118,7 @@ public class FichajeServiceimpl implements IFichajeService {
         }
 
         Fichaje fichajeExistente = fichajesRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Fichaje no encontrado con id " + id));
+                .orElseThrow(() -> new RuntimeException("Fichaje no encontrado con id " + id));
 
         if (fichajeExistente.getFechaFin().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("No se pueden modificar fichajes ya terminados");
@@ -128,11 +128,14 @@ public class FichajeServiceimpl implements IFichajeService {
                 throw new IllegalArgumentException("La fecha de fin no puede ser anterior a la fecha de inicio");
             }
         }
-        try{
-            fichajeMapper.updateEntityFromDTO(dto, fichajeExistente);
+        try {
+            if (dto.getCantidad() != null && dto.getMoneda() != null) {
+                fichajeExistente.setDinero(new com.edu.back.mcs.PracticaFinal.model.ValueObjects.Dinero(
+                        dto.getCantidad(), dto.getMoneda()));
+            }
 
             return fichajesRepository.save(fichajeExistente);
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             throw new RuntimeException("Error al actualizar el fichaje: " + e.getMessage());
         }
     }
