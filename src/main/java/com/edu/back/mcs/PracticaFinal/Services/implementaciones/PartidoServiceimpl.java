@@ -1,5 +1,6 @@
 package com.edu.back.mcs.PracticaFinal.Services.implementaciones;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.edu.back.mcs.PracticaFinal.Services.IPartidoService;
 import com.edu.back.mcs.PracticaFinal.mappers.PartidoMapper;
+import com.edu.back.mcs.PracticaFinal.model.Equipo;
 import com.edu.back.mcs.PracticaFinal.model.Partido;
 import com.edu.back.mcs.PracticaFinal.model.DTO.PartidoDetalleDTO;
+import com.edu.back.mcs.PracticaFinal.repository.EquipoRepository;
 import com.edu.back.mcs.PracticaFinal.repository.PartidoRepository;
 
 @Service
@@ -17,10 +20,13 @@ public class PartidoServiceimpl implements IPartidoService {
 
     public final PartidoRepository partidoRepository;
     public final PartidoMapper partidoMapper;
+    public final EquipoRepository equipoRepository;
 
-    public PartidoServiceimpl(PartidoRepository partidoRepository, PartidoMapper partidoMapper) {
+    public PartidoServiceimpl(PartidoRepository partidoRepository, PartidoMapper partidoMapper,
+            EquipoRepository equipoRepository) {
         this.partidoRepository = partidoRepository;
         this.partidoMapper = partidoMapper;
+        this.equipoRepository = equipoRepository;
     }
 
     @Override
@@ -121,4 +127,10 @@ public class PartidoServiceimpl implements IPartidoService {
         return partidoRepository.findAll();
     }
 
+    @Override
+    public Optional<Partido> buscarPartido(Long localId, Long visitanteId, LocalDate fecha) {
+        Equipo local = equipoRepository.findById(localId).orElseThrow();
+        Equipo visitante = equipoRepository.findById(visitanteId).orElseThrow();
+        return partidoRepository.findByEquipoLocalAndEquipoVisitanteAndFechaPartido(local, visitante, fecha);
+    }
 }

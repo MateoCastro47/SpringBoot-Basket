@@ -45,6 +45,18 @@ public class PartidoController {
                 .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/buscar")
+    public ResponseEntity<PartidoDetalleDTO> buscarPartido(
+            @org.springframework.web.bind.annotation.RequestParam Long local,
+            @org.springframework.web.bind.annotation.RequestParam Long visitante,
+            @org.springframework.web.bind.annotation.RequestParam java.time.LocalDate fecha) {
+
+        return partidoService.buscarPartido(local, visitante, fecha)
+                .map(partidoMapper::toDTO)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<PartidoDetalleDTO> create(@RequestBody PartidoDetalleDTO partidoDetalleDTO,
             UriComponentsBuilder ucb) {
