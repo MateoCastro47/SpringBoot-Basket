@@ -18,20 +18,17 @@ import com.edu.back.mcs.PracticaFinal.Services.IFichajeService;
 import com.edu.back.mcs.PracticaFinal.mappers.FichajeMapper;
 import com.edu.back.mcs.PracticaFinal.model.Fichaje;
 import com.edu.back.mcs.PracticaFinal.model.DTO.FichajeDTO;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
 @RestController
 @RequestMapping("/api/fichajes")
 public class FichajeController {
-    
+
     private final FichajeMapper fichajeMapper;
     private final IFichajeService fichajeService;
-
 
     public FichajeController(FichajeMapper fichajeMapper, IFichajeService fichajeService) {
         this.fichajeMapper = fichajeMapper;
@@ -39,19 +36,19 @@ public class FichajeController {
     }
 
     @GetMapping
-    public List<FichajeDTO> getAll(){
+    public List<FichajeDTO> getAll() {
         return fichajeService.obtenerTodosLosFichajes().stream().map(fichajeMapper::toDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<FichajeDTO> getById(@RequestParam Long id){
+    public ResponseEntity<FichajeDTO> getById(@PathVariable Long id) {
         return fichajeService.obtenerFichajePorId(id).map(fichajeMapper::toDTO)
-        .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-    
+
     @PostMapping
-    public ResponseEntity<FichajeDTO> create(@RequestBody FichajeDTO fichajeDTO, UriComponentsBuilder ucb){
-        
+    public ResponseEntity<FichajeDTO> create(@RequestBody FichajeDTO fichajeDTO, UriComponentsBuilder ucb) {
+
         Fichaje fichajeNuevo = fichajeService.crearFichaje(fichajeDTO);
         FichajeDTO fichajeNuevoDTO = fichajeMapper.toDTO(fichajeNuevo);
 
@@ -60,7 +57,7 @@ public class FichajeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<FichajeDTO> update(@PathVariable Long id, @RequestBody FichajeDTO fichajeDTO){
+    public ResponseEntity<FichajeDTO> update(@PathVariable Long id, @RequestBody FichajeDTO fichajeDTO) {
 
         Fichaje fichajeActualizado = fichajeService.actualizarFichaje(id, fichajeDTO);
         return ResponseEntity.ok(fichajeMapper.toDTO(fichajeActualizado));
@@ -68,7 +65,7 @@ public class FichajeController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         fichajeService.borrarFichaje(id);
     }
 }

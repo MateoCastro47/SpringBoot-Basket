@@ -44,7 +44,7 @@ public class EstadisticasController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EstadisticasJugadorDTO> getById(@RequestParam Long id){
+    public ResponseEntity<EstadisticasJugadorDTO> getById(@PathVariable Long id){
         return estadisticasJugadorService.obtenerEstadisticasPorId(id).map(estadisticasJugadorMapper::toDTO)
         .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
