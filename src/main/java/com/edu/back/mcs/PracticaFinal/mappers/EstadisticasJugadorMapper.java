@@ -12,8 +12,8 @@ import com.edu.back.mcs.PracticaFinal.model.DTO.EstadisticasJugadorDTO;
 @Mapper(componentModel = "spring")
 public interface EstadisticasJugadorMapper {
 
-    @Mapping(target = "jugadorNombre", ignore = true)
-    @Mapping(target = "partidoId", ignore = true)
+    @Mapping(source = "jugador.nombre", target = "jugadorNombre")
+    @Mapping(source = "partido.partido_id", target = "partidoId")
     EstadisticasJugadorDTO toDTO(EstadisticasJugador estadisticas);
 
     @Mapping(target = "jugador", ignore = true)

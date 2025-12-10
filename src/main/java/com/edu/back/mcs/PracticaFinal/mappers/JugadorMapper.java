@@ -9,7 +9,7 @@ import com.edu.back.mcs.PracticaFinal.model.DTO.JugadorDetalleDTO;
 
 @Mapper(componentModel = "spring", uses = { EquipoResumenDTOMapper.class, EstadisticasJugadorMapper.class,
         FichajeMapper.class })
-public interface JugadorMapper {
+public interface JugadorMapper { 
 
     @Mapping(source = "equipo", target = "equipoResumenDTO")
     @Mapping(source = "estadisticas", target = "estadisticasJugador")

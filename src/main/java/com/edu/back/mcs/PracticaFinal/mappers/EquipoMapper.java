@@ -17,7 +17,7 @@ import com.edu.back.mcs.PracticaFinal.model.DTO.EquipoDetalleDTO;
         PartidoResumenMapper.class,
         FichajeMapper.class
 })
-public interface EquipoMapper {
+public interface EquipoMapper { 
 
     @Mapping(source = "jugadores", target = "jugadores")
     EquipoDetalleDTO toDTO(Equipo equipo);
