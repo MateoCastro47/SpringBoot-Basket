@@ -46,6 +46,20 @@ public class FichajeController {
                 .map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/activos")
+    public List<FichajeDTO> getActivos() {
+    return fichajeService.obtenerFichajesActivos().stream()
+            .map(fichajeMapper::toDTO)
+            .collect(Collectors.toList());
+    }
+
+    @GetMapping("/temporada/{temporada}")
+    public List<FichajeDTO> getPorTemporada(@PathVariable String temporada) {
+    return fichajeService.obtenerFichajesPorTemporada(temporada).stream()
+            .map(fichajeMapper::toDTO)
+            .collect(Collectors.toList());
+    }
+
     @PostMapping
     public ResponseEntity<FichajeDTO> create(@RequestBody FichajeDTO fichajeDTO, UriComponentsBuilder ucb) {
 

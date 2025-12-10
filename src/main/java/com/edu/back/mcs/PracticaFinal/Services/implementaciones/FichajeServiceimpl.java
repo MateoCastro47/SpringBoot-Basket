@@ -12,6 +12,7 @@ import com.edu.back.mcs.PracticaFinal.Services.IFichajeService;
 import com.edu.back.mcs.PracticaFinal.mappers.FichajeMapper;
 import com.edu.back.mcs.PracticaFinal.model.Fichaje;
 import com.edu.back.mcs.PracticaFinal.model.DTO.FichajeDTO;
+import com.edu.back.mcs.PracticaFinal.model.ValueObjects.Temporada;
 import com.edu.back.mcs.PracticaFinal.repository.EquipoRepository;
 import com.edu.back.mcs.PracticaFinal.repository.FichajesRepository;
 import com.edu.back.mcs.PracticaFinal.repository.JugadorRepository;
@@ -155,4 +156,18 @@ public class FichajeServiceimpl implements IFichajeService {
         return fichajesRepository.findAll();
     }
 
+    @Override
+    public List<Fichaje> obtenerFichajesActivos() {
+        return fichajesRepository.findFichajesActivos(LocalDate.now());
+    }
+
+    @Override
+    public List<Fichaje> obtenerFichajesPorTemporada(String temporadaNombre) {
+       if (temporadaNombre == null) {
+        throw new IllegalArgumentException("La temporada no puede ser nula");
+       }
+       return fichajesRepository.findByTemporada( new Temporada (temporadaNombre));
+    }
+
+    
 }

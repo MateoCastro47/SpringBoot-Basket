@@ -17,4 +17,7 @@ public interface IFichajeService {
     void borrarFichaje(Long id);
 
     Fichaje actualizarFichaje(Long id, FichajeDTO dto);
+
+    List<Fichaje> obtenerFichajesActivos();
+    List<Fichaje> obtenerFichajesPorTemporada(String temporadaNombre);
 }
